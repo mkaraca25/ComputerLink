@@ -1,0 +1,95 @@
+%while ve kullanmak daha mantıklı çünkü for kullansaydık döngünün kaç defa
+%döneceğini bilmeyeceğimiz için döngü değişkeninine bir sınır koyamazdık
+%bitiş değeri belli olmadığından while kullanmak bu tip problemlerde daha
+%mantıklı...
+%ayrıca döngü değişkenin sınırı belli durumlarda for kullandım.
+clc;
+clear;
+dizi=[];
+sayi=0;
+sayacAnaDongu=0;
+while(true)
+    sayacAnaDongu=sayacAnaDongu+1;
+    sayi=input("Lutfen bir sayi giriniz(sayı girme işlemini durdurmak için -1 giriniz.): ");
+    if(sayi==-1)%kullanıcı -1 girdiğin de döngü de çıkma durumu
+        break;
+    end
+    dizi(sayacAnaDongu)=sayi;
+end
+
+ondalikliSayac=0;
+ondalikliToplam=0;
+for i=1:length(dizi) % pozitif ondalikli sayilar.
+    if(dizi(i)>0 && ~TamSayiMi(dizi(i))) %0 büyük ve tamsayi değil ise
+        ondalikliSayac=ondalikliSayac+1; %ondalık sayı bir arttırma
+        ondalikliToplam=ondalikliToplam+dizi(i);%ondalık sayıyı atama
+    end
+end
+ondalikliPozitifSayiOrtalamasi=ondalikliToplam/ondalikliSayac;
+
+
+%negatif tek tam 
+
+harmonikOrtalamaSayaci=0;
+harmonikOrtalamaToplamiBolumlu=0;
+for i=1:length(dizi)
+    if(dizi(i)<0 && mod(dizi(i),2) && TamSayiMi(dizi(i)))%0 dan küçük tek tam sayı
+        harmonikOrtalamaSayaci=harmonikOrtalamaSayaci+1;
+        harmonikOrtalamaToplamiBolumlu=harmonikOrtalamaToplamiBolumlu+1/(dizi(i));
+    end
+end
+
+harmonikOrtalama=harmonikOrtalamaSayaci/harmonikOrtalamaToplamiBolumlu;
+
+%pozitif çift tamsayi
+pozitifCiftTamSayiSayaci=0;
+pozitifCiftTamSayiCarpimi=1; 
+for i=1:length(dizi)
+    if(dizi(i)>0 && ~mod(dizi(i),2) && TamSayiMi(dizi(i)))%0 dan büyük pozitif çift tam sayılar
+        pozitifCiftTamSayiSayaci=pozitifCiftTamSayiSayaci+1;
+        pozitifCiftTamSayiCarpimi=pozitifCiftTamSayiCarpimi*dizi(i);
+    end
+end
+pozitifCiftTamSayilarinGeometrikOrtalamasi=nthroot(pozitifCiftTamSayiCarpimi,pozitifCiftTamSayiSayaci);
+
+
+enBuyukNegatif=-inf; %-sonsuz aldım
+for i=1:length(dizi)
+    if(enBuyukNegatif<dizi(i) && dizi(i)<0)      %en büyük negatif bulma 
+        if(mod(dizi(i),2) && TamSayiMi(dizi(i)))
+            enBuyukNegatif=dizi(i);
+        end
+    end
+end
+
+%girilen en küçük ondalikli sayi
+enKucukOndalikliSayi=dizi(i);
+for i=1:length(dizi)
+    if(enKucukOndalikliSayi>dizi(i))
+        if(~TamSayiMi(dizi(i)))
+            enKucukOndalikliSayi=dizi(i);
+        end
+    end
+end
+if(TamSayiMi(enKucukOndalikliSayi))
+    enKucukOndalikliSayi="";
+end
+enBuyuk=dizi(1);
+for i=1:length(dizi)
+    if(enBuyuk<dizi(i))
+        enBuyuk=dizi(i);
+    end
+end
+if (TamSayiMi(enBuyuk))          %enbüyüğün tamsayı olup olmama durumu
+    enBuyukTamSayi="TAM SAYIDIR.";
+else
+    enBuyukTamSayi="TAM SAYI DEĞİLDİR.";
+end
+
+
+fprintf("Girilen pozitif ondalıklı sayıların aritmetik ortalaması= %g \n",ondalikliPozitifSayiOrtalamasi);
+fprintf("Girilen negatif tek tam sayıların harmonik ortalaması= %g \n",harmonikOrtalama);
+fprintf("Girilen pozitif çift tam sayıların geometrik ortalaması= %g \n",pozitifCiftTamSayilarinGeometrikOrtalamasi);
+fprintf("Girilen en büyük negatif tek tam sayı= %g \n",enBuyukNegatif);
+fprintf("Girilen en küçük ondalıklı sayı= %g \n",enKucukOndalikliSayi);
+fprintf("Girilen en büyük sayının tam sayı durumu= %s \n",enBuyukTamSayi);
