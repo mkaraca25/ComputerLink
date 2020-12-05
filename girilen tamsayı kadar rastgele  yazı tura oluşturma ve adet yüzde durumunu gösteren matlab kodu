@@ -1,0 +1,28 @@
+%for ile nereye kadar gideceğini kullanıcıdan aldığım için
+%for kullanmayı daha mantıklı buldum.
+clc;
+clear;
+turaYaziSayisi=input('Atacağınız yazı tura sayısını giriniz= ');
+yazi=0;tura=0;
+if turaYaziSayisi>0 && round(turaYaziSayisi)==turaYaziSayisi
+for i=1:turaYaziSayisi  
+    rassal=round(1*rand(1)); %Rastgele [0,1] kapalı aralığında sayı üretsin.
+                           %1 gelirse Tura 0  gelirse Yazı olarak aldım
+    if rassal==1 %rastgele oluşturulan sayı 1 gelmişse Tura.
+        tura=tura+1; %İfe girdiğinde Tura güncel değerini 1 arttırsın.
+    elseif rassal==0 %0 ise Yazı.
+        yazi=yazi+1; %elseif'e girdiğinde Yazı güncel değerini 1 arttırsın.
+    else
+    end
+end
+fprintf('Toplam %d adet rastgele yazı tura attırılmıştır.\n',turaYaziSayisi);
+yuzde=100*tura/turaYaziSayisi;
+fprintf('Tura sayısı:%d',tura);
+fprintf(' ve toplam atışlar içindeki yüzdesi: %%%g\n',yuzde);
+yuzde1=100*yazi/turaYaziSayisi;
+fprintf('Yazı sayısı:%d',yazi);
+fprintf(' ve toplam atışlar içindeki yüzdesi: %%%g\n',yuzde1);
+v(3)=0; %Ekrana yazdırdıktan sonra başka yazı tura için değişken sıfırlanmalı.
+else
+    fprintf('Lütfen pozitif bir tam sayı adeti giriniz...\n');
+end
