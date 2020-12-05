@@ -1,0 +1,47 @@
+%while döngüsünü kullanmayı daha mantıklı buldum. Çünkü işlemleri değişken
+%sınırı yoktur.
+clc;
+clear;
+x=input('Lütfen pozitif bir tam sayı giriniz= ');
+sorgu=mod(x,5);
+if sorgu~=0&& x>2
+    while(1)
+        if mod(x,2)==0 %Çift sayı olma durumu
+            islem=x-2;  %çift ise 2 azalt
+            if mod(islem,5)==0 %5 ile bölme durumu
+                fprintf('girdiğiniz sayı veya en yakın çift komşusu kuralı sağlamadığı için tekrar sayı giriniz.\n');
+                break;
+            else
+               fprintf('%d''sayısının 5 ile bölünmeyen ve kendisinden küçük en yakın çift sayı komşusu vardır.\n',x);
+               fprintf('En yakın Komşu sayı= %d\n',islem);
+               faktor=1;%faktor u ilk önce 1 olarak tanımlatıyorum ki 0 faktöryeli de hesaplasın ve çarpım 0 olmasın diye...
+                for i=1:islem %faktoryeli hesaplamak için sayıyı kendisine kadar döndürüyorum...
+                   faktor=faktor*i;%Sayıyı her seferinde döngü değişkeni ile çarpıyorum...
+                end
+                fprintf('5 ile bölünmeyen en yakın komşu çift sayının faktöriyeli: %g\n',faktor);
+               break;
+            end
+        elseif mod(x,2)==1 %tek sayı olma durumu
+            islem=x-1;      %tek ise bir azalt
+                if mod(islem,5)==0
+                fprintf('girdiğiniz sayı veya en yakın çift komşusu kuralı sağlamadığı için tekrar sayı giriniz.\n');
+                break;
+                else
+                    fprintf('%d''sayısının 5 ile bölünmeyen ve kendisinden küçük en yakın çift sayı komşusu vardır.\n',x);
+                    fprintf('En yakın Komşu sayı= %d\n',islem);
+                    faktor=1;%faktor u ilk önce 1 olarak tanımlatıyorum ki 0 faktöryeli de hesaplasın ve çarpım 0 olmasın diye...
+                    for i=1:islem %faktoryeli hesaplamak için sayıyı kendisine kadar döndürüyorum...
+                       faktor=faktor*i;%Sayıyı her seferinde döngü değişkeni ile çarpıyorum...
+                    end
+                    fprintf('5 ile bölünmeyen en yakın komşu çift sayının faktöriyeli: %g\n',faktor);
+                    break;
+                end
+        else     
+        end
+    end
+    
+elseif x==1||x==2
+    disp('girdiğiniz sayının 5 ile bölünmeyen en yakın komşu çift sayı yoktur...');
+else
+    disp('Girdiğiniz sayı pozitif tam sayı ve 5 ile bölünmeyen sayı olmalıdır...');
+end
