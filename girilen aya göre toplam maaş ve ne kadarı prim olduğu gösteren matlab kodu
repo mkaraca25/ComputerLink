@@ -1,0 +1,17 @@
+%for ile nereye kadar gideceğini kullanıcıdan aldığım için
+%for kullanmayı daha mantıklı buldum.
+clc;
+clear;
+ay=input('Lütfen kaç ay çalıştığınızı giriniz= ');
+maas=2400;prim=0;%başlangıçta maaşı 2400 TL aldım primi sıfır.
+for i=1:ay 
+    if mod(i,12)==0
+       maas=maas+(maas*10)/100;%12 ayda bir maaşa yüzde 10 zam
+    else
+        prim=prim+(maas*1)/100;%her ay  maaşa yüzde 1 prim
+        maas=maas+prim;
+    end
+end
+yuzde=(prim*100)/2400;%İlk maaşın toplam yüzde kaçı prim hesabı
+fprintf('Toplam maaşınız:%g\n',maas);
+fprintf('İlk maaşınızın toplam yüzde %% %0.3g prim alınmıştır..\n',yuzde);
