@@ -1,0 +1,18 @@
+function [durum]=TamSayiMi(x)
+
+if (x<0)
+    x=(-1)*x; % sayı negatif ise -1 ile çarpıp pozitif yapıyorum.
+end
+sayac=1;
+while(true)
+    if(x-sayac==0) 
+        durum=1;
+        return;
+    elseif (x-sayac<0)
+        durum=0;
+        return;
+    else
+        sayac=sayac+1;
+    end
+end
+end
